@@ -1,0 +1,45 @@
+.x: 0 at ;
+.y: 1 at ;
+=x: 0 ins ;
+=y: 1 ins ;
+
+add2X:
+  swap -> P
+  P .x +
+  P =x ;
+
+add2Y:
+  swap -> P
+  P .y +
+  P =y ;
+
+box:
+  -> W
+  -> P
+  P W 2 / neg add2X
+  W 2 / neg add2Y
+  beginPath moveTo
+  P W add2X lineTo
+  P W add2Y lineTo
+  P W neg add2X lineTo
+  closePath
+  stroke ;
+
+centerCanvas:
+  canvasWidth 2 /
+  canvasHeight 2 /
+  translate ;
+
+"red" strokeStyle
+centerCanvas
+"destination-out" globalCompositeOperation
+
+40
+[
+  "#FFF4" strokeStyle
+  3 lineWidth
+  [0 0] 300 box
+  5 rotate
+  0 40 random2 0 40 random2 translate
+]
+times

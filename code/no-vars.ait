@@ -1,0 +1,34 @@
+.x: 0 at ;
+.y: 1 at ;
+=x: 0 ins ;
+=y: 1 ins ;
+add2X:
+  swap
+  dup [ .x + ] dip
+  =x ;
+add2Y:
+  swap
+  dup [ .y + ] dip
+  =y ;
+
+box:
+  dup [ 2 / neg add2X ] dip
+  dup [ 2 / neg add2Y ] dip
+
+  beginPath
+  dup moveTo
+  dup [ add2X dup lineTo ] dip
+  dup [ add2Y dup lineTo ] dip
+  dup [ neg add2X lineTo ] dip
+  closePath
+  stroke ;
+
+centerCanvas:
+  canvasWidth 2 /
+  canvasHeight 2 /
+  translate ;
+
+centerCanvas
+"red" strokeStyle
+
+[0 0] 100 box
